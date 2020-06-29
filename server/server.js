@@ -8,6 +8,7 @@ const availabilityRouter = require('./routes/availability.js');
 const loginRouter = require('./routes/login.js');
 const profileRouter = require('./routes/profile.js');
 
+app.use(express.static('assets'));
 app.use((req, res, next) => {
   console.log(`
   ********* FLOW TEST *********\n
