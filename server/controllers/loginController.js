@@ -46,10 +46,11 @@ loginController.getAccessToken = (req, res, next) => {
 
               // save everything to db
               const sqlQuery = `INSERT INTO tutors (email, name, photo) VALUES ($1, $2, $3)`;
-              db.query(sqlQuery, [email, newUser.name, newUser.imgUrl]).then((err, result) => {
-                if (err) return console.error(err);
-                return res.redirect('http://localhost:8080/home');
-              });
+              db.query(sqlQuery, [email, newUser.name, newUser.imgUrl])
+                .then((result) => {
+                  return res.redirect('http://localhost:8080/home');
+                })
+                .catch((err) => console.error('error saving to database:', err));
             })
             .catch((err) => console.error('error in the get user email', err));
         })
