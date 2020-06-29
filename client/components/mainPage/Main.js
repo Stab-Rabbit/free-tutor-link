@@ -16,7 +16,7 @@ const Main = (props) => {
       <AvailableTutor
         imgUrl={tutor.photo}
         name={tutor.name}
-        linkedInUrl={tutor.linkedInUrl}
+        linkedInUrl={tutor.linkedinprofile}
         date={tutor.date}
         startTime={tutor.start}
         endTime={tutor.end}
@@ -32,7 +32,7 @@ const Main = (props) => {
       .then((resp) => resp.json())
       .then(
         (result) => {
-          console.log('Tutors ', result.tutors);
+          // console.log('Tutors ', result.tutors);
           setTutors(result.tutors);
         },
         (error) => {
