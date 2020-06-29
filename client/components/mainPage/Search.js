@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Search = (props) => {
   return (
     <div>
-      <select name="skills" id="skills" value={props.choice} onChange={props.handleChoice}>
-        <option value="JavaScript">JavaScript</option>
-        <option value="React">React</option>
-        <option value="SQL">SQL</option>
-        <option value="Node_Express">Node Express</option>
-        <option value="Ruby">Ruby</option>
-        <option value="MongoDB">MongoDB</option>
+      <select name='skills' id='skills' value={props.choice} onChange={props.handleChoice}>
+        <option value='JavaScript'>JavaScript</option>
+        <option value='React'>React</option>
+        <option value='SQL'>SQL</option>
+        <option value='Node_Express'>Node Express</option>
+        <option value='Ruby'>Ruby</option>
+        <option value='MongoDB'>MongoDB</option>
       </select>
       <button onClick={props.handleSearch}>Search</button>
     </div>
