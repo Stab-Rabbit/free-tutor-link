@@ -1,0 +1,48 @@
+TABLE events = {
+    COLUMN event_id int
+    COLUMN tutor_id int
+    COLUMN time (date object)
+}
+
+TABLE event_topics = {
+    COLUMN event_id int
+    COLUMN topic_id int
+}
+
+TABLE available_topics = {
+    COLUMN topic_id int
+    COLUMN topic varchar
+}
+
+TABLE tutors = {
+    COLUMN tutor_id int
+    COLUMN name varchar
+}
+
+TABLE tutor_topics = {
+    COLUMN tutor_id int
+    COLUMN topic_id int
+}
+
+TABLE students = {
+    COLUMN student_id int
+    COLUMN name varchar
+}
+
+TABLE student_events = {
+    COLUMN event_id int
+    COLUMN student_id int
+}
+
+TABLE upvotes = {
+    COLUMN event_id int
+    COLUMN topic_id int
+    COLUMN upvotes int
+}
+
+TABLE event_messages = {
+    COLUMN event_id int
+    COLUMN student_id int // either student or tutor ID required
+    COLUMN tutor_id int // either student or tutor ID required
+    COLUMN message varchar
+}
