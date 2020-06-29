@@ -3,8 +3,6 @@ import Availability from './Availability.js';
 import SkillSet from './SkillSet';
 
 const Profile = (props) => {
-  const [mainPage, setMainPage] = useState(true);
-  const [profilePage, setProfilePage] = useState(true);
   const [availability, setAvailability] = useState([]);
   const [skills, setSkills] = useState([]);
 
@@ -40,11 +38,11 @@ const Profile = (props) => {
       <hr />
       <h3>Availability</h3>
       <span>
-        <input type="date"></input>
-        <label htmlFor="timeStart">From:</label>
-        <input type="time" id="timeStart"></input>
-        <label htmlFor="timeEnd">To:</label>
-        <input type="time" id="timeEnd"></input>
+        <input type='date'></input>
+        <label htmlFor='timeStart'>From:</label>
+        <input type='time' id='timeStart'></input>
+        <label htmlFor='timeEnd'>To:</label>
+        <input type='time' id='timeEnd'></input>
         <button>Save</button>
       </span>
       {schedule}

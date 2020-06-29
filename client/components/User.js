@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Main from './mainPage/Main';
 import Profile from './profilePage/Profile';
 
-const User = (props) => {
+const User = () => {
   const [mainPage, setMainPage] = useState(true);
   const [profilePage, setProfilePage] = useState(true);
 

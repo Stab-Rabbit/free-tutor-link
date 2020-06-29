@@ -17,3 +17,6 @@ build/
 
 # jest coverage
 coverage/
+
+# environmental variables
+.env

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AvailableTutor from './AvailableTutor';
 import Search from './Search';
-import Profile from '../profilePage/Profile';
 
 const Main = (props) => {
   const [error, setError] = useState(null);
@@ -16,7 +15,7 @@ const Main = (props) => {
       <AvailableTutor
         imgUrl={tutor.photo}
         name={tutor.name}
-        linkedInUrl={tutor.linkedInUrl}
+        linkedInUrl={tutor.linkedinprofile}
         date={tutor.date}
         startTime={tutor.start}
         endTime={tutor.end}
@@ -26,13 +25,11 @@ const Main = (props) => {
   });
 
   const handleSearch = (e) => {
-    // const skillName = e.target.value;
     const skillName = choice;
     fetch(`/availability/${skillName}`)
       .then((resp) => resp.json())
       .then(
         (result) => {
-          console.log('Tutors ', result.tutors);
           setTutors(result.tutors);
         },
         (error) => {

@@ -1,16 +1,16 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import Login from "./Login.js";
-import User from "./User.js";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Login from './Login.js';
+import User from './User.js';
 
-const App = (props) => {
+const App = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <Login />
         </Route>
-        <Route path="/home">
+        <Route path='/home'>
           <User />
         </Route>
       </Switch>

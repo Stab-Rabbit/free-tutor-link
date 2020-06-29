@@ -21,6 +21,7 @@
 	"homepage": "https://github.com/LovelaceDink/free-tutor-link#readme",
 	"dependencies": {
 		"cookie-parser": "^1.4.5",
+		"dotenv": "^8.2.0",
 		"express": "^4.12.3",
 		"pg": "^8.2.1",
 		"react": "^16.2.0",
