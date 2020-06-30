@@ -29,6 +29,7 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.3.1",
 		"react-router-dom": "^5.2.0",
+		"sequelize": "^6.2.3",
 		"superagent": "^5.2.2"
 	},
 	"devDependencies": {

@@ -9,8 +9,8 @@ tutorsController.getAllTutors = (req, res, next) => {
   // get the name from the tutors table
   // get the topics from the available_topics JOINED to the tutor_topics TABLE JOINED to the available_topics TABLE
   // get the events from the events table, filtered by tutor_id
-  const queryString = `SELECT tutors.name, available_topics.topic, events FROM tutors`; // TODO: talk to database team about this
-  db.query(queryString)
+  const queryString = `SELECT name FROM tutors`; // TODO: talk to database team about this
+  db.queryNew(queryNewString)
     .then((result) => {
       if (!result.rows.length) {
         return next({ code: 404, message: 'NO TUTORS FOUND IN THE DATABASE' });
@@ -24,7 +24,7 @@ tutorsController.getAllTutors = (req, res, next) => {
 tutorsController.getTutorsByTopic = (req, res, next) => {
   const { topic } = req.params;
   const queryString = `SELECT name FROM tutors WHERE `; // TODO: talk to dB about how to search by topic
-  db.query(queryString)
+  db.queryNew(queryString)
     .then((result) => {
       if (!result.rows.length) {
         return next({ code: 404, message: 'COULD NOT FIND TUTORS BY TOPIC' });
@@ -71,16 +71,16 @@ tutorsController.postStudentEvents =(req, res, next) => {
   })
   .catch((err) => console.error('error retrieving student events', err));
 }
-tutorsController.deleteEvent = (req, res, next) => {
-  const queryString = `DELETE events`;
-  db.query(queryString) 
-  .then((result) => {
-    if(!result.rows.length) {
-      return next({code: 404, message: 'COULD NOT DELETE EVENT'});
-    }
-    .catch((err) => console.error('error deleting event', err));
-  })
-}
+// tutorsController.deleteEvent = (req, res, next) => {
+//   const queryString = `DELETE events`;
+//   db.query(queryString) 
+//   .then((result) => {
+//     if(!result.rows.length) {
+//       return next({code: 404, message: 'COULD NOT DELETE EVENT'});
+//     })
+//     .catch((err) => console.error('error deleting event', err));
+//   })
+// }
 module.exports = tutorsController;
 
 /*

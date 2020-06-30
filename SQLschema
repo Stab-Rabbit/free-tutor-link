@@ -46,3 +46,4 @@ TABLE event_messages = {
     COLUMN tutor_id int // either student or tutor ID required
     COLUMN message varchar
 }
+
