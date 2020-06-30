@@ -1,54 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import AvailableTutor from './AvailableTutor';
-import Search from './Search';
+import EventsContainer from './EventsContainer';
+import TopicDropdown from './TopicDropdown';
+
+const topics = ['React', 'Redux', 'React Router', 'NodeJS', 'Express'];
 
 const Main = (props) => {
-  const [error, setError] = useState(null);
-  const [choice, setChoice] = useState('');
-  const [availableTutors, setTutors] = useState([]);
+  const { setIsLoggedIn } = props;
+  const [events, setEvents] = useState([]);
 
-  const tutors = [];
-
-  if (!availableTutors.length) tutors.push(<div>No Tutors Available</div>);
-  availableTutors.forEach((tutor) => {
-    tutors.push(
-      <AvailableTutor
-        imgUrl={tutor.photo}
-        name={tutor.name}
-        linkedInUrl={tutor.linkedinprofile}
-        date={tutor.date}
-        startTime={tutor.start}
-        endTime={tutor.end}
-        email={tutor.email}P
-      />
-    );
-  });
-
-  const handleSearch = (e) => {
-    const skillName = choice;
-    fetch(`/availability/${skillName}`)
+  const getAllEvents = () => {
+    fetch('/events/all')
       .then((resp) => resp.json())
-      .then(
-        (result) => {
-          setTutors(result.tutors);
-        },
-        (error) => {
-          setError(error);
-        }
-      );
+      .then((data) => {
+        console.log(data);
+        setEvents(data);
+      })
+      .catch(console.error);
   };
 
-  const handleChoice = (e) => {
-    setChoice(e.target.value);
-  };
+  useEffect(() => {
+    setIsLoggedIn(true);
+    getAllEvents();
+  }, []);
 
   return (
     <div>
-      <div>
-        <button onClick={props.handleToProfile}>My Tutoring Times</button>
-      </div>
-      <Search handleSearch={handleSearch} handleChoice={handleChoice} choice={choice} />
-      <div>{tutors}</div>
+      <TopicDropdown topics={topics} setEvents={setEvents} />
+      <EventsContainer events={events} />
     </div>
   );
 };
