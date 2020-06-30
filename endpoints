@@ -1,0 +1,55 @@
+
+GET /tutors/all
+- Should return an array of all tutors
+
+GET /tutors/topic/:topic
+- Should return an array of all tutors who are good in the provided topic
+
+GET /topic/all
+- Should return an array of all topics
+
+GET /events/all
+- Should return an array of all events
+
+GET /events/topic/:topic
+- Should return an array of all events with the provided topics
+
+GET /events/tutor/:tutor
+- Should return an array of all events with a provided tutor
+
+GET /events/date/:date
+- Should return an array of all events on the provided date
+
+GET /events/student/:student
+- Should return an array of all events for the provided student
+
+POST /events/student/:student
+- Should assign the provided student to the event in the request body
+
+POST /events/tutor/:tutor
+- Should assign the provided tutor to the event in the request body
+
+POST /events/topic/:topic
+- Should assign the provided topic to the event in the request body
+
+DELETE /event/:event
+- Should remove the provided event 
+
+Return Objects: 
+
+Event = {
+    time: Date()
+    tutor: Tutor
+    topics: Topic[],
+}
+
+Tutor = {
+        name: String,
+        imageURL: String,
+        link: String,
+}
+
+Topic = {
+    name: String,
+    upvotes: Number
+}

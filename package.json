@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": "nodemon server/server.js",
 		"build": "webpack --env.NODE_ENV=production",
-		"dev": "webpack-dev-server --env.NODE_ENV=development --open & nodemon server/server.js"
+		"dev": "webpack-dev-server --env.NODE_ENV=development --open & nodemon server/server.js",
+		"devtest": "cross-env concurrently \"webpack-dev-server --env.NODE_ENV=development --open\"  \"nodemon server/server.js\""
 	},
 	"repository": {
 		"type": "git",
@@ -35,10 +36,9 @@
 		"@babel/preset-env": "^7.10.3",
 		"@babel/preset-react": "^7.10.1",
 		"babel-loader": "^8.1.0",
-		"concurrently": "^4.1.0",
+		"concurrently": "^4.1.2",
 		"cross-env": "^5.2.0",
 		"css-loader": "^3.6.0",
-		"file-loader": "^6.0.0",
 		"isomorphic-fetch": "^2.2.1",
 		"nodemon": "^1.18.9",
 		"sass": "^1.26.8",

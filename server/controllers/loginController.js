@@ -1,17 +1,22 @@
 const db = require('../db.js');
 const dotenv = require('dotenv').config();
+const request = require('superagent');
+const { setCookie } = require('./requests/requests.js');
+const CLIENT_ID = process.env.CLIENT_ID; // '77iojwzvr5axo9';
+const CLIENT_SECRET = process.env.CLIENT_SECRET; // '2Ul4nGyuuFbylkm5';
+const REDIRECT_URI = process.env.REDIRECT_URI; // 'http://localhost:3000/login/authCode';
 
-const {
-  requestAccessToken,
-  setCookie,
-  getNameAndPicture,
-  getUserEmail,
-} = require('./requests/requests');
+// const {
+//   requestAccessToken,
+//   setCookie,
+//   getNameAndPicture,
+//   getUserEmail,
+// } = require('./requests/requests');
 
 const loginController = {};
 
-const CLIENT_ID = process.env.CLIENT_ID; // '77iojwzvr5axo9';
-const REDIRECT_URI = process.env.REDIRECT_URI; // 'http://localhost:3000/login/authCode';
+// const CLIENT_ID = process.env.CLIENT_ID; // '77iojwzvr5axo9';
+// const REDIRECT_URI = process.env.REDIRECT_URI; // 'http://localhost:3000/login/authCode';
 
 loginController.sendToLinkedIn = (req, res) =>
   res.redirect(
@@ -19,46 +24,57 @@ loginController.sendToLinkedIn = (req, res) =>
   );
 
 loginController.getAccessToken = (req, res, next) => {
-  // linked in is going to send us a code on query params
   const { code } = req.query;
+  res.locals.code = code;
+  return next();
+};
 
-  // send this code to linked in, get back an access token
-  requestAccessToken(code)
-    .then((accessRes) => {
-      // returns access token on the response body
-      const { access_token } = accessRes.body;
-      setCookie(res, access_token);
-      // request the name and picture of the user, sends access token to linked in
-      getNameAndPicture(access_token)
-        .then((userRes) => {
-          const firstName = Object.values(userRes.body.firstName.localized)[0];
-          const lastName = Object.values(userRes.body.lastName.localized)[0];
-          const imgUrl =
-            userRes.body.profilePicture['displayImage~'].elements[0].identifiers[0].identifier;
-          const newUser = {
-            name: `${firstName} ${lastName}`,
-            imgUrl,
-          };
-          // request email of the user from linked in
-          getUserEmail(access_token)
-            .then((emailRes) => {
-              const email = emailRes.body.elements[0]['handle~'].emailAddress;
+loginController.requestAccessToken = (req, res, next) => {
+  // make a post request with access token
+  request.post(
+    `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${res.locals.code}&redirect_uri=${REDIRECT_URI}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
+  )
+  .then((accessRes) => {
+    const { access_token } = accessRes.body;
+    res.locals.access_token = access_token;
+    return next();
+  })
+  .catch(err => console.error('err at requestAccessToken:', err));
+};
 
-              // save everything to db
-              const sqlQuery = `INSERT INTO tutors (email, name, photo) VALUES ($1, $2, $3)`;
-              db.query(sqlQuery, [email, newUser.name, newUser.imgUrl])
-                .then((result) => {
-                  return res.redirect('http://localhost:8080/home');
-                })
-                .catch((err) => console.error('error saving to database:', err));
-            })
-            .catch((err) => console.error('error in the get user email', err));
-        })
-        .catch((err) => console.error('error in get name and picture:', err));
+loginController.setCookie = (req, res, next) => {
+  res.cookie('accessToken', res.locals.access_token, { httpOnly: true, secure: true });
+  return next();
+}
+
+loginController.getNameAndPicture = (req, res, next) => {
+  request.get('https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))')
+  .set('Authorization', `Bearer ${res.locals.access_token}`)
+  .then((userRes) => {
+    const firstName = Object.values(userRes.body.firstName.localized)[0];
+    const lastName = Object.values(userRes.body.lastName.localized)[0];
+    const imgUrl = userRes.body.profilePicture['displayImage~'].elements[0].identifiers[0].identifier;
+    const newUser = {
+      name: `${firstName} ${lastName}`,
+      imgUrl,
+      }
+    res.locals.newUser = newUser;
+    return next();
     })
-    .catch((err) => {
-      console.error('error in request access token', err);
-    });
+  .catch(err => console.error('err at getNameAndPicture:', err));
+};
+
+loginController.getUserEmail = (req, res, next) => {
+  request.get('https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))')
+  .set('Authorization', `Bearer ${res.locals.access_token}`)
+  .then((emailRes) => {
+    const email = emailRes.body.elements[0]['handle~'].emailAddress;
+    // save everything to db
+    const sqlQuery = `INSERT INTO tutors (email, name, photo) VALUES ($1, $2, $3)`;
+    db.query(sqlQuery, [email, res.locals.newUser.name, res.locals.newUser.imgUrl])
+    return next();
+  })
+  .catch(err => console.error('err at getUserEmail:', err))
 };
 
 module.exports = loginController;
