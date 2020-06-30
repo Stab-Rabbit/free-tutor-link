@@ -7,6 +7,7 @@ const PORT = 3000;
 const availabilityRouter = require('./routes/availability.js');
 const loginRouter = require('./routes/login.js');
 const profileRouter = require('./routes/profile.js');
+const tutorsRouter = require('./routes/tutors');
 
 app.use(express.static('assets'));
 app.use((req, res, next) => {
@@ -27,7 +28,7 @@ app.use(cookieParser());
 app.use('/availability', availabilityRouter);
 app.use('/login', loginRouter);
 app.use('/profile', profileRouter);
-
+app.use('/tutors', tutorsRouter);
 /**
  * route handler to respond with main app
  */

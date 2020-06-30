@@ -32,7 +32,10 @@ POST /events/tutor/:tutor
 POST /events/topic/:topic
 - Should assign the provided topic to the event in the request body
 
-DELETE /event/:event
+POST /events/topic/:topic/upvotes
+- Should add or subtract an upvote to the provided topic in the event in the request body
+
+DELETE /events/:event
 - Should remove the provided event 
 
 Return Objects: 
