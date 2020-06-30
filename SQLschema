@@ -2,6 +2,7 @@ TABLE events = {
     COLUMN event_id int
     COLUMN tutor_id int
     COLUMN time (date object)
+    COLUMN event_name varchar
 }
 
 TABLE event_topics = {
@@ -16,7 +17,9 @@ TABLE available_topics = {
 
 TABLE tutors = {
     COLUMN tutor_id int
-    COLUMN name varchar
+    COLUMN name varchar 
+    COLUMN tutor_linkedin varchar **
+    COLUMN image_url varchar **
 }
 
 TABLE tutor_topics = {
@@ -27,6 +30,8 @@ TABLE tutor_topics = {
 TABLE students = {
     COLUMN student_id int
     COLUMN name varchar
+    COLUMN student_linkedin varchar **
+    COLUMN image_url varchar **
 }
 
 TABLE student_events = {

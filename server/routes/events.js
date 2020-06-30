@@ -15,9 +15,7 @@ const {
 } = require('../controllers/eventsController');
 
 const sendEvents = (req, res) => res.status(200).json(res.locals.events);
-
 const confirmAddition = (req, res) => res.status(201).json(res.locals.event);
-
 const confirmDeletion = (req, res) => res.sendStatus(204);
 
 eventsRouter.get('/all', getAllEvents, sendEvents);
@@ -32,3 +30,5 @@ eventsRouter.post('/topic/:event/upvotes', upvoteEvent, confirmAddition);
 eventsRouter.post('/topic/:topic', addTopicToEvent, confirmAddition);
 eventsRouter.post('/events', addEvent, confirmAddition);
 eventsRouter.delete('/events/:event', deleteEvent, confirmDeletion);
+
+module.exports = eventsRouter;
