@@ -7,8 +7,6 @@ SELECT name FROM tutors
 GET /tutors/topic/:topic
 - Should return an array of all tutors who are good in the provided topic
 
-
-
 GET /topic/all
 - Should return an array of all topics
 

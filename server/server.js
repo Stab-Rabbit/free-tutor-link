@@ -8,6 +8,7 @@ const availabilityRouter = require('./routes/availability.js');
 const loginRouter = require('./routes/login.js');
 const profileRouter = require('./routes/profile.js');
 const tutorsRouter = require('./routes/tutors');
+const eventsRouter = require('./routes/events');
 
 app.use((req, res, next) => {
   console.log(`
@@ -28,6 +29,7 @@ app.use('/availability', availabilityRouter);
 app.use('/login', loginRouter);
 app.use('/profile', profileRouter);
 app.use('/tutors', tutorsRouter);
+app.use('events', eventsRouter);
 /**
  * route handler to respond with main app
  */
