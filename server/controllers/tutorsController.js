@@ -34,53 +34,8 @@ tutorsController.getTutorsByTopic = (req, res, next) => {
     })
     .catch((err) => console.error('error retrieving tutors by topic', err));
 };
-tutorsController.getAllTopics = (req, res, next) => {
-  const queryString = `SELECT topic*`;
-  db.query(queryString)
-  .then((result) => {
-    if (!result.rows.length) {
-      return next({code: 404, message: 'COULD NOT FIND ALL TOPICS'});
-    }
-    res.locals.topic = result.rows;
-      next();
-  })
-    .catch((err) => console.error('errors retrieving all topics', err));
-}
-tutorsController.getAllEvents = (req, res, next) => {
-  const queryString = `SELECT events*`;
-  db.query(queryString)
-  .then((result) => {
-    if(!result.rows.length) {
-      return next({code: 404, message: 'COULD NOT FIND ALL EVENTS'});
-    }
-    res.locals.topic = results.rows;
-    next();
-  })
-  .catch((err) => console.error('errors retrieving all events', err));
-}
-tutorsController.postStudentEvents =(req, res, next) => {
-  const { student } = req.params;
-  const queryString = `SELECT events`;
-  db.query(queryString)
-  .then((result) => {
-    if(!result.rows.length) {
-      return next({code: 404, message: 'COULD NOT FIND STUDENT EVENTS'});
-    }
-    res.locals.topic = result.rows;
-    next();
-  })
-  .catch((err) => console.error('error retrieving student events', err));
-}
-// tutorsController.deleteEvent = (req, res, next) => {
-//   const queryString = `DELETE events`;
-//   db.query(queryString) 
-//   .then((result) => {
-//     if(!result.rows.length) {
-//       return next({code: 404, message: 'COULD NOT DELETE EVENT'});
-//     })
-//     .catch((err) => console.error('error deleting event', err));
-//   })
-// }
+
+
 module.exports = tutorsController;
 
 /*
