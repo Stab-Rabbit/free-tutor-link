@@ -1,7 +1,9 @@
+// add name of event
 TABLE events = {
     COLUMN event_id int
     COLUMN tutor_id int
-    COLUMN time (date object)
+    COLUMN time (date object) // DEFAULT DATE
+  //  COLUMN event_name varchar
 }
 
 TABLE event_topics = {
@@ -14,19 +16,26 @@ TABLE available_topics = {
     COLUMN topic varchar
 }
 
+// added image_url and tutor_linkedin
 TABLE tutors = {
     COLUMN tutor_id int
     COLUMN name varchar
+ //   COLUMN image_url varchar
+ //   COLUMN tutor_linkedin varchar
 }
+
 
 TABLE tutor_topics = {
     COLUMN tutor_id int
     COLUMN topic_id int
 }
 
+// added student's image_url and student_linkedin
 TABLE students = {
     COLUMN student_id int
     COLUMN name varchar
+ //   COLUMN image_url varchar
+ //   COLUMN student_linkedin varchar
 }
 
 TABLE student_events = {

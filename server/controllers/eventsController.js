@@ -7,7 +7,7 @@ const getEvents = (queryString, req, res, next) => {
         console.warn('No results found for the following query: \n', queryString);
         return next({ code: 404, message: 'NO RESULTS FOUND' });
       }
-      res.locals.events = results.rows;
+      res.locals.events = result.rows;
       next();
     })
     .catch((err) => {
@@ -16,7 +16,7 @@ const getEvents = (queryString, req, res, next) => {
 };
 
 const addEvent = (queryString, req, res, next) => {
-  db.query(queryString)
+  db.queryNew(queryString)
     .then((result) => {
       if (!result.rows.length) {
         console.error('NO RESULT ADDED', queryString);
@@ -32,23 +32,52 @@ const addEvent = (queryString, req, res, next) => {
 
 const eventsController = {};
 
+/*
+
+MIDDLEWARES: 
+
+Get all events
+Get list of topics by event_id
+Get tutor by event_id
+
+
+
+*/
+
 eventsController.getAllEvents = (req, res, next) => {
-  const queryString = `SELECT * FROM events`;
+  const queryString = `SELECT e.*, a.topic, tutors.* FROM events e LEFT JOIN event_topics t ON e.event_id = t.event_id FULL OUTER JOIN available_topics a ON t.topic_id = a.topic_id INNER JOIN tutors ON tutors.tutor_id = e.tutor_id`;
   getEvents(queryString, req, res, next);
 };
+
+
 eventsController.getEventsByTopic = (req, res, next) => {
   const { topic } = req.params;
-  const queryString = `SELECT * FROM events WHERE `; // TODO: FIGURE THIS OUT
+  const queryString = `SELECT * FROM events e INNER JOIN tutor_topics t ON e.tutor_id = t.tutor_id INNER JOIN available_topics a ON t.topic_id = a.topic_id WHERE a.topic = '${topic}';`;
+  // TODO: FIGURE THIS OUT -> figured out(?)
   getEvents(queryString, req, res, next);
 };
+
 eventsController.getEventsByTutor = (req, res, next) => {
   const { tutor } = req.params;
-  const queryString = `SELECT * FROM events WHERE `; // TODO: FIGURE THIS OUT
+  const queryString = `SELECT * FROM events e INNER JOIN tutors t ON e.tutor_id = t.tutor_id WHERE t.name = '${tutor}'`; // TODO: FIGURE THIS OUT
   getEvents(queryString, req, res, next);
 };
+
+// TODO: Dropdown filter events by topic
+
+// get event by id -> should return specific event
+// EventDetails component
+eventsController.getEventsByEvent = (req, res, next) => {
+  const { event } = req.params;
+  const queryString = `SELECT * FROM events e WHERE e.event_name = '${event}'`; // TODO: FIGURE THIS OUT
+  getEvents(queryString, req, res, next);
+};
+
+// END OF WHERE WE WORKED ON
+
 eventsController.getEventsByDate = (req, res, next) => {
   const { date } = req.params;
-  const queryString = `SELECT * FROM events WHERE   `; // TODO: FIGURE THIS OUT
+  const queryString = `SELECT * FROM events WHERE  time = ${date}; `; // TODO: FIGURE THIS OUT
   getEvents(queryString, req, res, next);
 };
 eventsController.getEventsByStudent = (req, res, next) => {

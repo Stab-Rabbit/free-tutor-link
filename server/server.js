@@ -30,7 +30,7 @@ app.use('/availability', availabilityRouter);
 app.use('/login', loginRouter);
 app.use('/profile', profileRouter);
 app.use('/tutors', tutorsRouter);
-app.use('events', eventsRouter);
+app.use('/events', eventsRouter);
 /**
  * route handler to respond with main app
  */
