@@ -43,12 +43,15 @@ DELETE /events/:event
 Return Objects: 
 
 Event = {
-    time: Date()
-    tutor: Tutor
+    ** need ID
+    name: String,
+    time: Date(),
+    tutor: Tutor,
     topics: Topic[],
 }
 
 Tutor = {
+    ** need ID
         name: String,
         imageURL: String,
         link: String,

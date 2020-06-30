@@ -7,7 +7,7 @@ const getEvents = (queryString, req, res, next) => {
         console.warn('No results found for the following query: \n', queryString);
         return next({ code: 404, message: 'NO RESULTS FOUND' });
       }
-      res.locals.events = results.rows;
+      res.locals.events = result.rows;
       next();
     })
     .catch((err) => {
