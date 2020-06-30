@@ -32,7 +32,6 @@ app.use('/login', loginRouter);
 app.use('/profile', profileRouter);
 app.use('/tutors', tutorsRouter);
 app.use('/events', eventsRouter);
-app.use('/topic', topicRouter);
 /**
  * route handler to respond with main app
  */

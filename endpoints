@@ -2,22 +2,29 @@
 GET /tutors/all
 - Should return an array of all tutors
 
-SELECT name FROM tutors
-
 GET /tutors/topic/:topic
 - Should return an array of all tutors who are good in the provided topic
 
 GET /topic/all
 - Should return an array of all topics
+- *dropdown topic, each topic should have ID and NAME
 
 GET /events/all
 - Should return an array of all events
 
+GET /events/:event
+- * Should return specific event 
+- Should return tutor name and link URL
+
+
 GET /events/topic/:topic
 - Should return an array of all events with the provided topics
+- *Once dropdown is selected -> filter events by topic
 
 GET /events/tutor/:tutor
 - Should return an array of all events with a provided tutor
+- * Return array of events and tutor obj
+
 
 GET /events/date/:date
 - Should return an array of all events on the provided date
@@ -43,20 +50,30 @@ DELETE /events/:event
 Return Objects: 
 
 Event = {
-    ** need ID
-    name: String,
     time: Date(),
-    tutor: Tutor,
-    topics: Topic[],
+    tutor: Tutor, // NEED THIS
+    topics: Topic[], // NEED THIS
+    name: String,
+    eventid: String,
+}
+
+Event = {
+    "time": null,
+    "event_id": 1,
+    "tutor_id": 0,
+    "event_name": "react 101",
+    tutor: 'kevin',
+    topics: [{ }]
 }
 
 Tutor = {
-    ** need ID
-        name: String,
-        imageURL: String,
-        link: String,
+    name: String,
+    imageURL: String,
+    link: String,
+    tutorid: String,
 }
 
+// Join tables together
 Topic = {
     name: String,
     upvotes: Number
