@@ -103,3 +103,5 @@ eventsController.deleteEvent = (req, res, next) => {
   const queryString = ``;
   deleteEvent(queryString, req, res, next);
 };
+
+module.exports = eventsController;
