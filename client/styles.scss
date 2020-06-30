@@ -1,0 +1,27 @@
+body {
+  background: center no-repeat ;
+  background-image: url('/Home.png');
+  width: 100vw;
+  height: 160vh;
+  margin: 0;
+  
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  font-family: 'Cutive', serif;
+  color: blue;
+  font-size: 60px;
+}
+
+#loginButton {
+  font-family: 'Cutive', serif;
+  color: blue;
+  font-size: 17px;
+  padding-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lime
+}

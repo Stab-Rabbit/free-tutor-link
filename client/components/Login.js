@@ -4,7 +4,7 @@ const Login = () => {
   return (
     <div>
       <h1>Welcome to FreeTutorLink!</h1>
-      <a href='/login'>Login with LinkedIn</a>
+      <a href='/login'><button id="loginButton" >Login with LinkedIn</button></a>
     </div>
   );
 };
