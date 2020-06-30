@@ -11,6 +11,7 @@ const tutorsRouter = require('./routes/tutors');
 const eventsRouter = require('./routes/events');
 const topicRouter = require('./routes/topic');
 
+app.use(express.static('assets'));
 app.use((req, res, next) => {
   console.log(`
   ********* FLOW TEST *********\n

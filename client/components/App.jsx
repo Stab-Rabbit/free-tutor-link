@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './Login.js';
 import User from './User.js';
+import styles from '../styles.scss'
 
 const App = () => {
   return (

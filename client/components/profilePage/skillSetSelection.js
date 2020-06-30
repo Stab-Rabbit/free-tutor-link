@@ -4,7 +4,7 @@ const skillSetSelection = () => {
   let skills = ['Javascript', 'SQL', 'HTML', 'Python', 'Java'];
   for (let i = 0; i < skills.length; i += 1) {
     checkbox.push(
-      <div>
+      <din>
         <input type='checkbox' id='skill ' name={`skills${i}`} value='skill' />
         <label htmlFor={`skills${i}`}>{skills[i]}</label>
       </div>

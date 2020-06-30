@@ -31,4 +31,8 @@ eventsRouter.post('/topic/:topic', addTopicToEvent, confirmAddition);
 eventsRouter.post('/events', addEvent, confirmAddition);
 eventsRouter.delete('/events/:event', deleteEvent, confirmDeletion);
 
+<<<<<<< HEAD
 module.exports = eventsRouter;
+=======
+module.exports = eventsRouter;
+>>>>>>> f3f186f5b0f796ac7457335b665eae8c6797627c
