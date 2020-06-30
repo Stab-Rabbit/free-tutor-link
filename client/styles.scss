@@ -1,10 +1,9 @@
-body {
-  background: center no-repeat ;
+html {
+  background: center no-repeat;
   background-image: url('/Home.png');
-  width: 100vw;
-  height: 160vh;
+  object-fit: cover;
+  height: 100vh;
   margin: 0;
-  
 }
 
 h1 {
@@ -21,11 +20,83 @@ h1 {
   font-size: 17px;
   padding-top: 7px;
   background-color: lime;
-
 }
 
 #goodPractice {
- display: flex;
- justify-content: center;
- margin-top: 220px;
+  display: flex;
+  justify-content: center;
+  margin-top: 220px;
+}
+
+.events-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+ul {
+  border: 2px solid whitesmoke;
+  border-radius: 1rem;
+  backdrop-filter: blur(24px);
+  box-shadow: 5px 10px 18px #b4101ebb;
+  display: block;
+  width: 40%;
+  max-width: 640px;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+ul > li {
+  font-size: larger;
+  color: black;
+  list-style-type: none;
+  padding: 0.25rem;
+  padding-left: 2rem;
+}
+
+ul > li:first-child {
+  font-size: x-large;
+  color: black;
+  list-style-type: none;
+  padding: 0;
+  margin: -1.2rem -1.2rem 0 -1.2rem;
+}
+
+img {
+  border-radius: 0.5rem 0.5rem 0 0;
+  width: 100%;
+}
+
+li span {
+  font-weight: bold;
+  font-family: 'Cutive', serif;
+  padding-right: 1.4rem;
+}
+
+li > a {
+  text-decoration: none;
+  color: black;
+}
+
+.tutor-pic {
+  width: 100%;
+  max-height: 14rem;
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  text-align: center;
+  font-size: 2em;
+  font-family: 'Cutive', serif;
+}
+
+#topics {
+  display: block;
+  margin: auto;
+  font-size: 1.2em;
+  align-self: center;
 }

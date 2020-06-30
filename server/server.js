@@ -9,6 +9,7 @@ const loginRouter = require('./routes/login.js');
 const profileRouter = require('./routes/profile.js');
 const tutorsRouter = require('./routes/tutors');
 const eventsRouter = require('./routes/events');
+const topicRouter = require('./routes/topic');
 
 app.use(express.static('assets'));
 app.use((req, res, next) => {
@@ -36,7 +37,7 @@ app.use('/events', eventsRouter);
  */
 app.use('/build', express.static(path.join(__dirname, '../build')));
 app.get('/home', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('Wake up Neo... Knock, knock.'));
@@ -47,6 +48,7 @@ app.use((req, res) => res.status(404).send('Wake up Neo... Knock, knock.'));
  */
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  console.error(err);
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
