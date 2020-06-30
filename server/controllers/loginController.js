@@ -1,7 +1,7 @@
 const db = require('../db.js');
 const dotenv = require('dotenv').config();
 const request = require('superagent');
-const { setCookie } = require('./requests/requests.js');
+//const { setCookie } = require('./requests/requests.js');
 const CLIENT_ID = process.env.CLIENT_ID; // '77iojwzvr5axo9';
 const CLIENT_SECRET = process.env.CLIENT_SECRET; // '2Ul4nGyuuFbylkm5';
 const REDIRECT_URI = process.env.REDIRECT_URI; // 'http://localhost:3000/login/authCode';
