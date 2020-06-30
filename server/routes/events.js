@@ -32,3 +32,5 @@ eventsRouter.post('/topic/:event/upvotes', upvoteEvent, confirmAddition);
 eventsRouter.post('/topic/:topic', addTopicToEvent, confirmAddition);
 eventsRouter.post('/events', addEvent, confirmAddition);
 eventsRouter.delete('/events/:event', deleteEvent, confirmDeletion);
+
+module.exports = eventsRouter;

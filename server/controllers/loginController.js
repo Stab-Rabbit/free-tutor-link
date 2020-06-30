@@ -65,8 +65,10 @@ loginController.getUserEmail = (req, res, next) => {
     .then((emailRes) => {
       const email = emailRes.body.elements[0]['handle~'].emailAddress;
       // save everything to db
-      const sqlQuery = `INSERT INTO tutors (email, name, photo) VALUES ($1, $2, $3)`;
-      db.query(sqlQuery, [email, res.locals.newUser.name, res.locals.newUser.imgUrl]);
+      // const sqlQuery = `INSERT INTO tutors (email, name, photo) VALUES ($1, $2, $3)`;
+      const sqlQuery = `INSERT INTO tutors (name, image_url, link) VALUES ($1, $2, $3);`
+      // db.query(sqlQuery, [email, res.locals.newUser.name, res.locals.newUser.imgUrl]);
+      db.queryNew(sqlQuery, [res.locals.newUser.name, res.locals.newUser.imgUrl, email]);
       return next();
     })
     .catch((err) => console.error('err at getUserEmail:', err));

@@ -2,7 +2,7 @@
 TABLE events = {
     COLUMN event_id int
     COLUMN tutor_id int
-    COLUMN time (date object)
+    COLUMN time (date object) // DEFAULT DATE
   //  COLUMN event_name varchar
 }
 

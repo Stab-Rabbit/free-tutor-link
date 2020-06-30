@@ -19,7 +19,7 @@ const Main = (props) => {
         date={tutor.date}
         startTime={tutor.start}
         endTime={tutor.end}
-        email={tutor.email}
+        email={tutor.email}P
       />
     );
   });

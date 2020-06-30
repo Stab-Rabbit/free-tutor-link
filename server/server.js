@@ -10,6 +10,7 @@ const profileRouter = require('./routes/profile.js');
 const tutorsRouter = require('./routes/tutors');
 const eventsRouter = require('./routes/events');
 
+app.use(express.static('assets'));
 app.use((req, res, next) => {
   console.log(`
   ********* FLOW TEST *********\n

@@ -9,10 +9,11 @@ tutorsController.getAllTutors = (req, res, next) => {
   // get the name from the tutors table
   // get the topics from the available_topics JOINED to the tutor_topics TABLE JOINED to the available_topics TABLE
   // get the events from the events table, filtered by tutor_id
-  const queryString = `SELECT name FROM tutors`; // TODO: talk to database team about this
-  db.queryNew(queryNewString)
+  const queryString = `SELECT * FROM tutors`; // TODO: talk to database team about this
+  db.queryNew(queryString)
     .then((result) => {
       if (!result.rows.length) {
+        console.error('NO TUTORS FOUND');
         return next({ code: 404, message: 'NO TUTORS FOUND IN THE DATABASE' });
       }
       res.locals.tutors = result.rows;
@@ -34,6 +35,7 @@ tutorsController.getTutorsByTopic = (req, res, next) => {
     })
     .catch((err) => console.error('error retrieving tutors by topic', err));
 };
+
 
 module.exports = tutorsController;
 
