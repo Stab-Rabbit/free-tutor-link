@@ -16,7 +16,7 @@ const getEvents = (queryString, req, res, next) => {
 };
 
 const addEvent = (queryString, req, res, next) => {
-  db.query(queryString)
+  db.queryNew(queryString)
     .then((result) => {
       if (!result.rows.length) {
         console.error('NO RESULT ADDED', queryString);
@@ -38,7 +38,11 @@ eventsController.getAllEvents = (req, res, next) => {
 };
 eventsController.getEventsByTopic = (req, res, next) => {
   const { topic } = req.params;
-  const queryString = `SELECT * FROM events WHERE `; // TODO: FIGURE THIS OUT
+  const queryString = `SELECT * FROM Events e INNER JOIN Available_Topics t ON e.topic_id = t.topic_id WHERE topic = ${topic}`;
+  /**
+   * SELECT * FROM Events e INNER JOIN Available_Topics t ON e.topic_id = t.topic_id WHERE topic = ${topic}
+   */ 
+  // TODO: FIGURE THIS OUT
   getEvents(queryString, req, res, next);
 };
 eventsController.getEventsByTutor = (req, res, next) => {
@@ -48,7 +52,7 @@ eventsController.getEventsByTutor = (req, res, next) => {
 };
 eventsController.getEventsByDate = (req, res, next) => {
   const { date } = req.params;
-  const queryString = `SELECT * FROM events WHERE   `; // TODO: FIGURE THIS OUT
+  const queryString = `SELECT * FROM events WHERE  time = ${date}; `; // TODO: FIGURE THIS OUT
   getEvents(queryString, req, res, next);
 };
 eventsController.getEventsByStudent = (req, res, next) => {
@@ -103,3 +107,5 @@ eventsController.deleteEvent = (req, res, next) => {
   const queryString = ``;
   deleteEvent(queryString, req, res, next);
 };
+
+module.exports = eventsController;

@@ -54,6 +54,7 @@ Tutor = {
         link: String,
 }
 
+// Join tables together
 Topic = {
     name: String,
     upvotes: Number
