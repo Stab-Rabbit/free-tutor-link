@@ -16,10 +16,10 @@ tutorsRouter.get('/all', getAllTopics,(req, res) => {
 tutorsRouter.get('/all', getAllEvents, (req, res) => {
   res.status(200).json(res.locals.events);
 });
-tutorsRouter.post('/events/:student', postStudentEvents,(req, res) => {
+eventsRouter.post('/events/:student', postStudentEvents,(req, res) => {
   res.status(200).json(res.locals.student);
 });
-tutorsRouter.delete('/events', deleteEvent, (req, res) => {
+eventsRouter.delete('/events', deleteEvent, (req, res) => {
   res.status(200).json(res.locals.student);
 })
 module.exports = tutorsRouter;
