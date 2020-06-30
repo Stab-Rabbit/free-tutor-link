@@ -19,9 +19,13 @@ h1 {
   font-family: 'Cutive', serif;
   color: blue;
   font-size: 17px;
-  padding-top: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: lime
+  padding-top: 7px;
+  background-color: lime;
+
+}
+
+#goodPractice {
+ display: flex;
+ justify-content: center;
+ margin-top: 220px;
 }
