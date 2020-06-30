@@ -6,17 +6,7 @@ const CLIENT_ID = process.env.CLIENT_ID; // '77iojwzvr5axo9';
 const CLIENT_SECRET = process.env.CLIENT_SECRET; // '2Ul4nGyuuFbylkm5';
 const REDIRECT_URI = process.env.REDIRECT_URI; // 'http://localhost:3000/login/authCode';
 
-// const {
-//   requestAccessToken,
-//   setCookie,
-//   getNameAndPicture,
-//   getUserEmail,
-// } = require('./requests/requests');
-
 const loginController = {};
-
-// const CLIENT_ID = process.env.CLIENT_ID; // '77iojwzvr5axo9';
-// const REDIRECT_URI = process.env.REDIRECT_URI; // 'http://localhost:3000/login/authCode';
 
 loginController.sendToLinkedIn = (req, res) =>
   res.redirect(
